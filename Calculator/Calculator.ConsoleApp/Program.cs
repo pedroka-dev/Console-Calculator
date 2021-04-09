@@ -5,38 +5,69 @@ namespace Calculator.ConsoleApp
 {
     class Program
     {
+        private static void ShowInitializationText()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("=-=-=-=-=- Calculator -=-=-=-=-=");
+            Console.WriteLine("Enter the type of the desired operation:");
+            Console.WriteLine("  1 - Addition");
+            Console.WriteLine("  2 - Subtraction");
+            Console.WriteLine("  3 - Multiplication");
+            Console.WriteLine("  4 - Division");
+            Console.WriteLine("  5 - Show previous operations");
+            Console.WriteLine("  6 - Exit");
+            Console.WriteLine("=-=-=-=-=- =-=-=-=-=-= -=-=-=-=-=");
+        }
+
+        private static void ShowErrorText(string errorMessage)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(errorMessage);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ReadLine();
+        }
+
+        private static void ShowResultText(double result, string operation)
+        {
+            Console.WriteLine("Result:" + result);
+            Console.WriteLine("=-=-=-=-=- =-=-=-=-=-= -=-=-=-=-=");
+            Console.WriteLine(operation);
+            Console.ReadLine();
+        }
+
+        private static bool IsExitOption(string option)
+        {
+            return option == "6";
+        }
+
+        private static bool IsPreviousOperationOption(string option)
+        {
+            return option == "5";
+        }
+
+        private static bool IsOption(string option)
+        {
+            return option != "1" && option != "2" && option != "3" && option != "4" && option != "5" && option != "6";
+        }
+
         static void Main(string[] args)
         {
             List<string> operationList = new List<string>();
 
             while (true)
             {
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("=-=-=-=-=- Calculator -=-=-=-=-=");
-                Console.WriteLine("Enter the type of the desired operation:");
-                Console.WriteLine("  1 - Addition");
-                Console.WriteLine("  2 - Subtraction");
-                Console.WriteLine("  3 - Multiplication");
-                Console.WriteLine("  4 - Division");
-                Console.WriteLine("  5 - Show previous operations");
-                Console.WriteLine("  6 - Exit");
-                Console.WriteLine("=-=-=-=-=- =-=-=-=-=-= -=-=-=-=-=");
+                ShowInitializationText();
 
                 string userOption = Console.ReadLine();
 
-                if(userOption != "1" && userOption != "2" && userOption != "3" 
-                    && userOption != "4" && userOption != "5" && userOption != "6")
+                if (IsOption(userOption))
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Error: Invalid operation type! Try again with a valid option.");
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.ReadLine();
-                    Console.Clear();
+                    ShowErrorText("Error: Invalid operation type! Try again with a valid option.");
                     continue;
                 }
 
-                if(userOption == "5")
+                if (IsPreviousOperationOption(userOption))
                 {
                     Console.WriteLine("=-=-=-=-=- OPERATIONS -=-=-=-=-=");
                     foreach (string operation in operationList)
@@ -46,7 +77,7 @@ namespace Calculator.ConsoleApp
                     Console.ReadLine();
                     continue;
                 }
-                else if (userOption == "6")
+                else if (IsExitOption(userOption))
                 {
                     break;
                 }
@@ -80,7 +111,7 @@ namespace Calculator.ConsoleApp
                             break;
 
                         case "4":
-                            if(numberB == "0")
+                            if (numberB == "0")
                                 throw new DivideByZeroException();
 
                             operationResult = double.Parse(numberA) / double.Parse(numberB);
@@ -94,30 +125,21 @@ namespace Calculator.ConsoleApp
                 }
                 catch (FormatException)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Error: Invalid format value. Try again with a valid double value.");
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.ReadLine();
-                    Console.Clear();
+                    ShowErrorText("Error: Invalid format value. Try again with a valid double value.");
                     continue;
                 }
 
                 catch (DivideByZeroException)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Error: Division by Zero is not allowed. Perform the division with any value other than 0.");
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.ReadLine();
+
+                    ShowErrorText("Error: Division by Zero is not allowed. Perform the division with any value other than 0.");
                     continue;
                 }
 
-                string sucessfulOperation = numberA.ToString() + " " + operationSymbol + " " + numberB.ToString() + " = " + operationResult.ToString();
-                operationList.Add(sucessfulOperation);
+                string sucessfullOperation = $"{numberA} {operationSymbol} {numberB} = {operationResult}";
+                operationList.Add(sucessfullOperation);
 
-                Console.WriteLine("Result:" + operationResult);
-                Console.WriteLine("=-=-=-=-=- =-=-=-=-=-= -=-=-=-=-=");
-                Console.WriteLine(sucessfulOperation);
-                Console.ReadLine();
+                ShowResultText(operationResult, sucessfullOperation);
                 continue;
             }
         }
