@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Calculator.ConsoleApp
 {
@@ -28,7 +29,7 @@ namespace Calculator.ConsoleApp
         //Nossa calculadora deve realizar as operações com "0"
         #endregion
 
-        #region Requisito 06    []
+        #region Requisito 06    [OK]
         /** Nossa calculadora deve permitir visualizar as operações já realizadas
          *  Critérios:
          *      1 - A descrição da operação realizada deve aparecer assim, exemplo:
@@ -39,8 +40,11 @@ namespace Calculator.ConsoleApp
 
         static void Main(string[] args)
         {
+            List<string> operationList = new List<string>();
+
             while (true)
             {
+                Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("=-=-=-=-=- CALCULADORA -=-=-=-=-=");
                 Console.WriteLine("Digita o tipo da operação desejada:");
@@ -67,7 +71,11 @@ namespace Calculator.ConsoleApp
 
                 if(opcaoUsuario == "5")
                 {
-                    Console.WriteLine("WIP.");
+                    Console.WriteLine("=-=-=-=-=- HISTÓRICO -=-=-=-=-=");
+                    foreach (string operation in operationList)
+                    {
+                        Console.WriteLine(operation);
+                    }
                     Console.ReadLine();
                     continue;
                 }
@@ -133,17 +141,16 @@ namespace Calculator.ConsoleApp
                     Console.WriteLine("Error: Divisão com Zero não é permitida. Realize a divisão com qualquer valor diferente de 0.");
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.ReadLine();
-                    Console.Clear();
                     continue;
                 }
 
                 string operacaoRealizada = numero1.ToString() + " " + simboloOperacao + " " + numero2.ToString() + " = " + resultado.ToString();
+                operationList.Add(operacaoRealizada);
 
                 Console.WriteLine("Resultado:" + resultado);
                 Console.WriteLine("=-=-=-=-=- =-=-=-=-=-= -=-=-=-=-=");
                 Console.WriteLine(operacaoRealizada);
                 Console.ReadLine();
-                Console.Clear();
                 continue;
             }
         }
