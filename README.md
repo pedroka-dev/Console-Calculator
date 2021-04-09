@@ -1,5 +1,5 @@
 # Introduction
-A simple console calculator made in C# .NET that can solve basic mathematic operations between two numbers.
+A simple console calculator made in C# .NET that can solve basic mathematic operations between two numbers. This project has been done as an exercise for Academia do Programador 2021.
 
 ![alt text](https://raw.githubusercontent.com/pedro-ca/Console-Calculator/main/Screenshot.JPG)
 
