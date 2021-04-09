@@ -13,32 +13,32 @@ namespace Calculator.ConsoleApp
             {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("=-=-=-=-=- CALCULADORA -=-=-=-=-=");
-                Console.WriteLine("Digita o tipo da operação desejada:");
-                Console.WriteLine("  1 - Adição");
-                Console.WriteLine("  2 - Subtração");
-                Console.WriteLine("  3 - Multiplicação");
-                Console.WriteLine("  4 - Divisão");
-                Console.WriteLine("  5 - Mostrar operações anteriores");
-                Console.WriteLine("  6 - Sair");
+                Console.WriteLine("=-=-=-=-=- Calculator -=-=-=-=-=");
+                Console.WriteLine("Enter the type of the desired operation:");
+                Console.WriteLine("  1 - Addition");
+                Console.WriteLine("  2 - Subtraction");
+                Console.WriteLine("  3 - Multiplication");
+                Console.WriteLine("  4 - Division");
+                Console.WriteLine("  5 - Show previous operations");
+                Console.WriteLine("  6 - Exit");
                 Console.WriteLine("=-=-=-=-=- =-=-=-=-=-= -=-=-=-=-=");
 
-                string opcaoUsuario = Console.ReadLine();
+                string userOption = Console.ReadLine();
 
-                if(opcaoUsuario != "1" && opcaoUsuario != "2" && opcaoUsuario != "3" 
-                    && opcaoUsuario != "4" && opcaoUsuario != "5" && opcaoUsuario != "6")
+                if(userOption != "1" && userOption != "2" && userOption != "3" 
+                    && userOption != "4" && userOption != "5" && userOption != "6")
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Error: Tipo de operação inválida! Tente novamente");
+                    Console.WriteLine("Error: Invalid operation type! Try again with a valid option.");
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.ReadLine();
                     Console.Clear();
                     continue;
                 }
 
-                if(opcaoUsuario == "5")
+                if(userOption == "5")
                 {
-                    Console.WriteLine("=-=-=-=-=- HISTÓRICO -=-=-=-=-=");
+                    Console.WriteLine("=-=-=-=-=- OPERATIONS -=-=-=-=-=");
                     foreach (string operation in operationList)
                     {
                         Console.WriteLine(operation);
@@ -46,45 +46,45 @@ namespace Calculator.ConsoleApp
                     Console.ReadLine();
                     continue;
                 }
-                else if (opcaoUsuario == "6")
+                else if (userOption == "6")
                 {
                     break;
                 }
 
-                Console.WriteLine("Digite o primeiro número:");
-                string numero1 = Console.ReadLine();
+                Console.WriteLine("Enter the first number:");
+                string numberA = Console.ReadLine();
 
-                Console.WriteLine("Digite o segundo número:");
-                string numero2 = Console.ReadLine();
+                Console.WriteLine("Enter the second number:");
+                string numberB = Console.ReadLine();
 
-                double resultado = 0;
-                string simboloOperacao = "";
+                double operationResult = 0;
+                string operationSymbol = "";
 
                 try
                 {
-                    switch (opcaoUsuario)
+                    switch (userOption)
                     {
                         case "1":
-                            resultado = double.Parse(numero1) + double.Parse(numero2);
-                            simboloOperacao = "+";
+                            operationResult = double.Parse(numberA) + double.Parse(numberB);
+                            operationSymbol = "+";
                             break;
 
                         case "2":
-                            resultado = double.Parse(numero1) - double.Parse(numero2);
-                            simboloOperacao = "-";
+                            operationResult = double.Parse(numberA) - double.Parse(numberB);
+                            operationSymbol = "-";
                             break;
 
                         case "3":
-                            resultado = double.Parse(numero1) * double.Parse(numero2);
-                            simboloOperacao = "*";
+                            operationResult = double.Parse(numberA) * double.Parse(numberB);
+                            operationSymbol = "*";
                             break;
 
                         case "4":
-                            if(numero2 == "0")
+                            if(numberB == "0")
                                 throw new DivideByZeroException();
 
-                            resultado = double.Parse(numero1) / double.Parse(numero2);
-                            simboloOperacao = "/";
+                            operationResult = double.Parse(numberA) / double.Parse(numberB);
+                            operationSymbol = "/";
                             break;
 
                         default:
@@ -95,7 +95,7 @@ namespace Calculator.ConsoleApp
                 catch (FormatException)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Error: Valor inválido. Digite um valor double válido para o calculo.");
+                    Console.WriteLine("Error: Invalid format value. Try again with a valid double value.");
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.ReadLine();
                     Console.Clear();
@@ -105,18 +105,18 @@ namespace Calculator.ConsoleApp
                 catch (DivideByZeroException)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Error: Divisão com Zero não é permitida. Realize a divisão com qualquer valor diferente de 0.");
+                    Console.WriteLine("Error: Division by Zero is not allowed. Perform the division with any value other than 0.");
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.ReadLine();
                     continue;
                 }
 
-                string operacaoRealizada = numero1.ToString() + " " + simboloOperacao + " " + numero2.ToString() + " = " + resultado.ToString();
-                operationList.Add(operacaoRealizada);
+                string sucessfulOperation = numberA.ToString() + " " + operationSymbol + " " + numberB.ToString() + " = " + operationResult.ToString();
+                operationList.Add(sucessfulOperation);
 
-                Console.WriteLine("Resultado:" + resultado);
+                Console.WriteLine("Result:" + operationResult);
                 Console.WriteLine("=-=-=-=-=- =-=-=-=-=-= -=-=-=-=-=");
-                Console.WriteLine(operacaoRealizada);
+                Console.WriteLine(sucessfulOperation);
                 Console.ReadLine();
                 continue;
             }
