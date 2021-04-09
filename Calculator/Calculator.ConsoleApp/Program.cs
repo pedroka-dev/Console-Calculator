@@ -5,39 +5,6 @@ namespace Calculator.ConsoleApp
 {
     class Program
     {
-        #region Requisito 01 [OK]
-        //Nossa calculadora deve ter a possibilidade de somar dois números
-        #endregion
-
-        #region Requisito 02 [OK]
-        //Nossa calculadora deve ter a possibilidade fazer várias operações de soma
-        #endregion
-
-        #region Requisito 03 [OK]
-        //Nossa calculadora deve ter a possibilidade fazer várias operações de soma e de subtração
-        #endregion
-
-        #region Requisito 04 [OK]
-        //Nossa calculadora deve ter a possibilidade fazer as quatro operações básicas da matemática
-        #endregion
-
-        #region Requisito 05 [OK]
-        //Nossa calculadora deve validar a opções do menu [OK]
-        #endregion
-
-        #region BUG 01 [OK]
-        //Nossa calculadora deve realizar as operações com "0"
-        #endregion
-
-        #region Requisito 06    [OK]
-        /** Nossa calculadora deve permitir visualizar as operações já realizadas
-         *  Critérios:
-         *      1 - A descrição da operação realizada deve aparecer assim, exemplo:
-         *          2 + 2 = 4
-         *          10 - 5 = 5
-         */
-        #endregion
-
         static void Main(string[] args)
         {
             List<string> operationList = new List<string>();
