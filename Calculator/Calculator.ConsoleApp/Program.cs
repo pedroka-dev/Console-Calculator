@@ -48,7 +48,7 @@ namespace Calculator.ConsoleApp
 
         private static bool IsOption(string option)
         {
-            return option != "1" && option != "2" && option != "3" && option != "4" && option != "5" && option != "6";
+            return option == "1" || option == "2" || option == "3" || option == "4" || option == "5" || option == "6";
         }
 
         static void Main(string[] args)
@@ -61,7 +61,7 @@ namespace Calculator.ConsoleApp
 
                 string userOption = Console.ReadLine();
 
-                if (IsOption(userOption))
+                if (!IsOption(userOption))
                 {
                     ShowErrorText("Error: Invalid operation type! Try again with a valid option.");
                     continue;
