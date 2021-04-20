@@ -3,6 +3,8 @@ A simple console calculator made in C# .NET that can solve basic mathematic oper
 
 ![alt text](https://raw.githubusercontent.com/pedro-ca/Console-Calculator/main/Screenshot.JPG)
 
+![alt text](https://raw.githubusercontent.com/pedro-ca/Console-Calculator/main/Fluxogram.JPG)
+
 # Requirements
    - The calculator must be able to add two numbers.
    - The calculator must be able to make multiple Addition operations.
