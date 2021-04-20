@@ -5,21 +5,6 @@ namespace Calculator.ConsoleApp
 {
     class Program
     {
-        private static bool IsExitOption(string option)
-        {
-            return option == "6";
-        }
-
-        private static bool IsPreviousOperationOption(string option)
-        {
-            return option == "5";
-        }
-
-        private static bool IsOption(string option)
-        {
-            return option == "1" || option == "2" || option == "3" || option == "4" || option == "5" || option == "6";
-        }
-
         static void Main(string[] args)
         {
             List<Operation> operationList = new List<Operation>();
@@ -30,13 +15,13 @@ namespace Calculator.ConsoleApp
 
                 string userOption = Console.ReadLine();
 
-                if (!IsOption(userOption))
+                if (!OptionVerifier.IsOption(userOption))
                 {
                     TextDisplayer.ShowErrorText("Error: Invalid operation type! Try again with a valid option.");
                     continue;
                 }
 
-                if (IsPreviousOperationOption(userOption))
+                if (OptionVerifier.IsPreviousOperationOption(userOption))
                 {
                     Console.WriteLine("=-=-=-=-=- OPERATIONS -=-=-=-=-=");
                     foreach (Operation operation in operationList)
@@ -46,7 +31,7 @@ namespace Calculator.ConsoleApp
                     Console.ReadLine();
                     continue;
                 }
-                else if (IsExitOption(userOption))
+                else if (OptionVerifier.IsExitOption(userOption))
                 {
                     break;
                 }
@@ -57,44 +42,35 @@ namespace Calculator.ConsoleApp
                 Console.WriteLine("Enter the second number:");
                 string numberBStr = Console.ReadLine();
 
-                double numberA;
-                double numberB;
-                string operationSymbol;
-                double operationResult;
-                
                 try
                 {
-                    numberA = double.Parse(numberAStr);
-                    numberB = double.Parse(numberBStr);
+                    Operation currentOperation = new Operation(double.Parse(numberAStr), double.Parse(numberBStr));
 
                     switch (userOption)
                     {
                         case "1":
-                            operationResult = numberA + numberB;
-                            operationSymbol = "+";
+                            currentOperation.Addition();
                             break;
 
                         case "2":
-                            operationResult = numberA - numberB;
-                            operationSymbol = "-";
+                            currentOperation.Subtraction();
                             break;
 
                         case "3":
-                            operationResult = numberA * numberB;
-                            operationSymbol = "*";
+                            currentOperation.Multiplication();
                             break;
 
                         case "4":
-                            if (numberBStr == "0")
-                                throw new DivideByZeroException();
-
-                            operationResult = numberA / numberB;
-                            operationSymbol = "/";
+                            currentOperation.Division();
                             break;
 
                         default:
                             continue;
                     }
+
+                    operationList.Add(currentOperation);
+                    TextDisplayer.ShowResultText(currentOperation);
+
                 }
                 catch (FormatException)
                 {
@@ -109,10 +85,6 @@ namespace Calculator.ConsoleApp
                     continue;
                 }
 
-                Operation sucessfullOperation = new Operation(numberA, numberB, operationSymbol, operationResult);
-                operationList.Add(sucessfullOperation);
-
-                TextDisplayer.ShowResultText(operationResult, sucessfullOperation.AttributesToString());
                 continue;
             }
         }

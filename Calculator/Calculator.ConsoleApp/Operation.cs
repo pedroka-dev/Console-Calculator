@@ -10,17 +10,41 @@ namespace Calculator.ConsoleApp
     {
         public double NumberA;
         public double NumberB;
-        public string OperationType;
+        public char OperationType;
         public double Result;
 
-        public Operation(double numberA, double numberB, string operationType, double result)
+        public Operation(double numberA, double numberB)
         {
             this.NumberA = numberA;
             this.NumberB = numberB;
-            this.OperationType = operationType;
-            this.Result = result;
         }
 
+        public void Subtraction()
+        {
+            Result = NumberA - NumberB;
+            OperationType = '-';
+        }
+        
+        public void Addition()
+        {
+            Result = NumberA + NumberB;
+            OperationType = '+';
+        }
+
+        public void Multiplication()
+        {
+            Result = NumberA * NumberB;
+            OperationType = '*';
+        }
+        
+        public void Division()
+        {
+            if (NumberB == 0)
+                throw new DivideByZeroException();
+
+            Result = NumberA / NumberB;
+            OperationType = '/';
+        }
         public string AttributesToString()
         {
             return $"`{this.NumberA} {this.OperationType} {this.NumberB} = {this.Result}";

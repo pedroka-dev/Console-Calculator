@@ -31,11 +31,11 @@ namespace Calculator.ConsoleApp
             Console.ReadLine();
         }
 
-        public static void ShowResultText(double result, string operation)
+        public static void ShowResultText(Operation operation)
         {
-            Console.WriteLine("Result:" + result);
+            Console.WriteLine("Result:" + operation.Result);
             Console.WriteLine("=-=-=-=-=- =-=-=-=-=-= -=-=-=-=-=");
-            Console.WriteLine(operation);
+            Console.WriteLine(operation.AttributesToString());
             Console.ReadLine();
         }
     }
