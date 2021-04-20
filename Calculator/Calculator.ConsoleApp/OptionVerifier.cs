@@ -6,21 +6,29 @@ using System.Threading.Tasks;
 
 namespace Calculator.ConsoleApp
 {
-    static class OptionVerifier
+    class OptionVerifier
     {
-        public static bool IsExitOption(string option)
+        public readonly string AdditionOption = "1";
+        public readonly string SubtractionOption = "2";
+        public readonly string MultiplicationOption = "3";
+        public readonly string DivisionOption = "4";
+        public readonly string ShowPreviousOption = "5";
+        public readonly string ExitOption = "6";
+
+
+        public bool IsExitOption(string option)
         {
-            return option == "6";
+            return option == ExitOption;
         }
 
-        public static bool IsPreviousOperationOption(string option)
+        public bool IsShowPreviousOption(string option)
         {
-            return option == "5";
+            return option == ShowPreviousOption;
         }
 
-        public static bool IsOption(string option)
+        public bool IsOption(string option)
         {
-            return option == "1" || option == "2" || option == "3" || option == "4" || option == "5" || option == "6";
+            return option == AdditionOption || option == SubtractionOption || option == MultiplicationOption || option == DivisionOption || option == ShowPreviousOption || option == ExitOption;
         }
     }
 }

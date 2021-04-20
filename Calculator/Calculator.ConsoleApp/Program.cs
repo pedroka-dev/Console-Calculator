@@ -8,20 +8,22 @@ namespace Calculator.ConsoleApp
         static void Main(string[] args)
         {
             List<Operation> operationList = new List<Operation>();
+            OptionVerifier verifier = new OptionVerifier();
+            TextDisplayer displayer = new TextDisplayer();
 
             while (true)
             {
-                TextDisplayer.ShowInitializationText();
+                displayer.ShowInitializationText();
 
                 string userOption = Console.ReadLine();
 
-                if (!OptionVerifier.IsOption(userOption))
+                if (!verifier.IsOption(userOption))
                 {
-                    TextDisplayer.ShowErrorText("Error: Invalid operation type! Try again with a valid option.");
+                    displayer.ShowErrorText("Error: Invalid operation type! Try again with a valid option.");
                     continue;
                 }
 
-                if (OptionVerifier.IsPreviousOperationOption(userOption))
+                if (verifier.IsShowPreviousOption(userOption))
                 {
                     Console.WriteLine("=-=-=-=-=- OPERATIONS -=-=-=-=-=");
                     foreach (Operation operation in operationList)
@@ -31,7 +33,7 @@ namespace Calculator.ConsoleApp
                     Console.ReadLine();
                     continue;
                 }
-                else if (OptionVerifier.IsExitOption(userOption))
+                else if (verifier.IsExitOption(userOption))
                 {
                     break;
                 }
@@ -69,19 +71,18 @@ namespace Calculator.ConsoleApp
                     }
 
                     operationList.Add(currentOperation);
-                    TextDisplayer.ShowResultText(currentOperation);
+                    displayer.ShowResultText(currentOperation);
 
                 }
                 catch (FormatException)
                 {
-                    TextDisplayer.ShowErrorText("Error: Invalid format value. Try again with a valid double value.");
+                    displayer.ShowErrorText("Error: Invalid format value. Try again with a valid double value.");
                     continue;
                 }
 
                 catch (DivideByZeroException)
                 {
-
-                    TextDisplayer.ShowErrorText("Error: Division by Zero is not allowed. Perform the division with any value other than 0.");
+                    displayer.ShowErrorText("Error: Division by Zero is not allowed. Perform the division with any value other than 0.");
                     continue;
                 }
 

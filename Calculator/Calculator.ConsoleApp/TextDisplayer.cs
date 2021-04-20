@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace Calculator.ConsoleApp
 {
-    static class TextDisplayer
+    class TextDisplayer
     {
-        public static void ShowInitializationText()
+        ConsoleColor defaultFontColor = ConsoleColor.Green;
+
+        public void ShowInitializationText()
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = defaultFontColor;
             Console.WriteLine("=-=-=-=-=- Calculator -=-=-=-=-=");
             Console.WriteLine("Enter the type of the desired operation:");
             Console.WriteLine("  1 - Addition");
@@ -23,15 +25,15 @@ namespace Calculator.ConsoleApp
             Console.WriteLine("=-=-=-=-=- =-=-=-=-=-= -=-=-=-=-=");
         }
 
-        public static void ShowErrorText(string errorMessage)
+        public void ShowErrorText(string errorMessage)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(errorMessage);
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = defaultFontColor;
             Console.ReadLine();
         }
 
-        public static void ShowResultText(Operation operation)
+        public void ShowResultText(Operation operation)
         {
             Console.WriteLine("Result:" + operation.Result);
             Console.WriteLine("=-=-=-=-=- =-=-=-=-=-= -=-=-=-=-=");
